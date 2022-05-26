@@ -1,0 +1,43 @@
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+table {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 875px;
+    margin-right: 875px;
+    background-color: green;
+}
+
+td {
+    width: 20px;
+    height: 20px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#score-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#timer-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

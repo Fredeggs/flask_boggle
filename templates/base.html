@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/app.css">
     <title>Boggle!</title>
 </head>
+
 <body>
     <h1>Welcome to Boggle</h1>
     <table>
@@ -22,11 +25,23 @@
         <label for="guess">Guess A Word: </label>
         <input type="text" id="guess" name="guess" autofocus>
         <button type="submit" id="submit">Submit</button>
-        <p id="guess-message"></p>
     </form>
+    <div id="message">
+        <p id="guess-message"></p>
+    </div>
+    <div id="score-div">
+        <label for="score">Score: </label>
+        <p id="score">0</p>
+    </div>
+    <div id="timer-div">
+        <label for="timer">Time: </label>
+        <p id="timer">60</p>
+    </div>
+
 
     <script src="https://unpkg.com/jquery"></script>
-    <script src="https://unpkg.com/axios/dist/axios.js"></script>   
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="/static/app.js"></script>
 </body>
+
 </html>
