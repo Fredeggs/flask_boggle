@@ -24,7 +24,7 @@ async function guessWord(evt) {
     handleResponse(response.data.result);
   }
   GUESSES.push($guess);
-  $("#guess").val("");
+  $("#guess").val(""); // reset input after a submission
 }
 
 function handleResponse(response) {
@@ -64,6 +64,7 @@ function countDown() {
   let intervalId = setInterval(() => {
     if ($timer.text() === "1") {
       disableSubmit();
+      updateStats();
       clearInterval(intervalId);
     }
     const subtractByOne = Number($timer.text()) - 1;
@@ -75,6 +76,16 @@ function disableSubmit() {
   $guess.prop("disabled", true);
   $submit.prop("disabled", true);
   $guessMessage.text("GAME OVER");
+}
+
+async function updateStats() {
+  const response = await axios({
+    url: "/process-game-over",
+    method: "POST",
+    data: { score: Number($('#score').text()) },
+  });
+  console.log(response)
+  window.location = "/show_game_over"
 }
 
 countDown();

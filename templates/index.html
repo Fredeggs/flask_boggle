@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form id="guess-word">
+    <label for="guess">Guess A Word: </label>
+    <input type="text" id="guess" name="guess" autofocus>
+    <button type="submit" id="submit">Submit</button>
+</form>
+<div id="message">
+    <p id="guess-message"></p>
+</div>
+<div id="score-div">
+    <label for="score">Score: </label>
+    <p id="score">0</p>
+</div>
+<div id="timer-div">
+    <label for="timer">Time: </label>
+    <p id="timer">10</p>
+</div>
+<div id="played-div">
+    <label for="played">Games Played: </label>
+    <p id="played">{{session.get("played", 0)}}</p>
+</div>
+
+{% endblock %}
