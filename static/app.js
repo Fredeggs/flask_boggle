@@ -1,52 +1,80 @@
 "use strict";
 
-
 const $boggleForm = $("#guess-word");
+const $submit = $("#submit");
+const $guess = $("#guess");
 const $guessMessage = $("#guess-message");
-const $score = $('#score');
-
+const $score = $("#score");
+const $timer = $("#timer");
+let GUESSES = [];
 $boggleForm.on("submit", guessWord);
 
 async function guessWord(evt) {
-  console.debug("guess word", evt);
   evt.preventDefault();
   const $guess = $("#guess").val();
-  const response = await axios({
-    url: "/process-guess",
-    method: "POST",
-    data: { $guess },
-  });
-  if (response.data.result === "ok") {
-    let score = Number($score.text())
-    score += Number($guess.length)
-    $score.text(score)
-    if ($guessMessage.css('display') === 'none') {
-      $guessMessage.css('display', 'block');
-      $guessMessage.text("Good Guess!").fadeOut(3000);
-    }
-    else {
-      $guessMessage.text("Good Guess!").fadeOut(3000);
-    }
-  } else if (response.data.result === "not-on-board") {
-    if ($guessMessage.css('display') === 'none') {
-      $guessMessage.css('display', 'block');
-      $guessMessage.text("That word is not on the board").fadeOut(3000);
-    }
-    else {
-      $guessMessage.text("That word is not on the board").fadeOut(3000);
-    }
+  console.log($guess);
+  if (GUESSES.includes($guess)) {
+    $guessMessage.text("You have already guessed that word").fadeOut(1000);
   } else {
-    if ($guessMessage.css('display') === 'none') {
-      $guessMessage.css('display', 'block');
-      $guessMessage.text("That is not a word").fadeOut(3000);
-    }
-    else {
-      $guessMessage.text("That is not a word").fadeOut(3000);
-    }
+    const response = await axios({
+      url: "/process-guess",
+      method: "POST",
+      data: { $guess },
+    });
+    handleResponse(response.data.result);
+  }
+  GUESSES.push($guess);
+  $("#guess").val("");
+}
+
+function handleResponse(response) {
+  console.log(response);
+  switch (response) {
+    case "ok":
+      let score = Number($score.text());
+      score += Number($guess.val().length);
+      $score.text(score);
+      if ($guessMessage.css("display") === "none") {
+        $guessMessage.css("display", "block");
+        $guessMessage.text("Good Guess!").fadeOut(1000);
+      } else {
+        $guessMessage.text("Good Guess!").fadeOut(1000);
+      }
+      break;
+    case "not-on-board":
+      if ($guessMessage.css("display") === "none") {
+        $guessMessage.css("display", "block");
+        $guessMessage.text("That word is not on the board").fadeOut(1000);
+      } else {
+        $guessMessage.text("That word is not on the board").fadeOut(1000);
+      }
+      break;
+    case "not-word":
+      if ($guessMessage.css("display") === "none") {
+        $guessMessage.css("display", "block");
+        $guessMessage.text("That is not a word").fadeOut(1000);
+      } else {
+        $guessMessage.text("That is not a word").fadeOut(1000);
+      }
+      break;
   }
 }
 
 function countDown() {
-  setTimeout() // Disable the ability to submit guesses after 60 sec
-  setInterval() // Subtract 1 from the timer after each second
+  let intervalId = setInterval(() => {
+    if ($timer.text() === "1") {
+      disableSubmit();
+      clearInterval(intervalId);
+    }
+    const subtractByOne = Number($timer.text()) - 1;
+    $timer.text(subtractByOne);
+  }, 1000);
 }
+
+function disableSubmit() {
+  $guess.prop("disabled", true);
+  $submit.prop("disabled", true);
+  $guessMessage.text("GAME OVER");
+}
+
+countDown();
