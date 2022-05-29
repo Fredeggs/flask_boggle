@@ -12,7 +12,7 @@
 <body>
     <h1>Welcome to Boggle</h1>
     <table>
-        {% for row in board %}
+        {% for row in session['board'] %}
         <tr>
             {% for letter in row %}
             <td>{{letter}}</td>

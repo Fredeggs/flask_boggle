@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div id="score-div">
+    <label for="score">Score: </label>
+    <p id="score">{{session.get("score", 0)}}</p>
+</div>
+<div id="highscore-div">
+    <label for="highscore">High Score: </label>
+    <p id="highscore">{{session.get("highscore", 0)}}</p>
+</div>
+<div id="played-div">
+    <label for="played">Games Played: </label>
+    <p id="played">{{session.get("played", 0)}}</p>
+</div>
 <form id="game-over-form">
     <h1>Game Over</h1>
     <button type="submit" id="play-again">Play Again?</button>

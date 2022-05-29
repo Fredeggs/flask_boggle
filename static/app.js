@@ -6,13 +6,14 @@ const $guess = $("#guess");
 const $guessMessage = $("#guess-message");
 const $score = $("#score");
 const $timer = $("#timer");
+const $gameOverForm = $("#game-over-form")
+
 let GUESSES = [];
 $boggleForm.on("submit", guessWord);
 
 async function guessWord(evt) {
   evt.preventDefault();
   const $guess = $("#guess").val();
-  console.log($guess);
   if (GUESSES.includes($guess)) {
     $guessMessage.text("You have already guessed that word").fadeOut(1000);
   } else {
@@ -28,7 +29,6 @@ async function guessWord(evt) {
 }
 
 function handleResponse(response) {
-  console.log(response);
   switch (response) {
     case "ok":
       let score = Number($score.text());
@@ -87,5 +87,10 @@ async function updateStats() {
   console.log(response)
   window.location = "/show_game_over"
 }
+
+$gameOverForm.on('submit', function (evt) {
+  evt.preventDefault();
+  window.location = "/"
+})
 
 countDown();

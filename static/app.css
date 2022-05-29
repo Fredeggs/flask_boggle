@@ -1,27 +1,28 @@
-h1 {
+h1,
+form,
+div {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 table {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 875px;
-    margin-right: 875px;
-    background-color: green;
+    padding: 30px;
+    margin-left: 40%;
+    margin-right: 40%;
+    border-spacing: 10px;
 }
 
 td {
+    text-align: center;
     width: 20px;
     height: 20px;
-}
-
-form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: 5px;
+    border-color: black;
 }
 
 #message {
@@ -30,20 +31,11 @@ form {
     justify-content: center;
 }
 
-#score-div {
+#game-over-form {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-#timer-div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#played-div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-left: 45%;
+    margin-right: 45%;
+    flex-wrap: wrap;
 }

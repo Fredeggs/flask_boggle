@@ -15,7 +15,11 @@
 </div>
 <div id="timer-div">
     <label for="timer">Time: </label>
-    <p id="timer">10</p>
+    <p id="timer">60</p>
+</div>
+<div id="highscore-div">
+    <label for="highscore">High Score: </label>
+    <p id="highscore">{{session.get("highscore", 0)}}</p>
 </div>
 <div id="played-div">
     <label for="played">Games Played: </label>
